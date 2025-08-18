@@ -18,14 +18,14 @@ data "aws_ami" "myami" {
   }
 
 }
-resource "aws_key_pair" "myterraformownkey" {
-  key_name   = "myownadvec2key1"
-  public_key = file("home/ubuntu/.ssh/id_ed25519.pub")
-}
+# resource "aws_key_pair" "myterraformownkey" {
+#   key_name   = "myownadvec2key1"
+#   public_key = file("home/ubuntu/.ssh/id_ed25519.pub")
+# }
 
 resource "aws_instance" "myownec2" {
   ami                    = data.aws_ami.myami.id
-  key_name               = aws_key_pair.myterraformownkey.key_name
+  key_name               = "dockerfile"
   instance_type          = "t2.micro"
   vpc_security_group_ids = [data.aws_security_group.mycloudsg.id]
   tags = {
@@ -41,7 +41,7 @@ resource "null_resource" "changes" {
     type = "ssh"
     user = "ubuntu"
     host = aws_instance.myownec2.public_ip
-    private_key = file("home/ubuntu/.ssh/id_ed25519")
+    # private_key = file("home/ubuntu/.ssh/id_ed25519")
 
   }
   provisioner "file" {
