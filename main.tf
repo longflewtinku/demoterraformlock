@@ -20,7 +20,7 @@ data "aws_ami" "myami" {
 }
 resource "aws_key_pair" "myterraformownkey" {
   key_name   = "myownadvec2key132"
-  public_key = file("/home/ubuntu/.ssh/id_ed25519.pub")
+  public_key = file("home/ubuntu/.ssh/id_ed25519.pub")
 }
 
 resource "aws_instance" "myownec2" {
@@ -41,7 +41,7 @@ resource "null_resource" "changes" {
     type = "ssh"
     user = "ubuntu"
     host = aws_instance.myownec2.public_ip
-    private_key = file("/home/ubuntu/.ssh/id_ed25519")
+    private_key = file("home/ubuntu/.ssh/id_ed25519")
 
   }
   provisioner "file" {
