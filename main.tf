@@ -19,7 +19,7 @@ data "aws_ami" "myami" {
 
 }
 resource "aws_key_pair" "myterraformownkey" {
-  key_name   = "myownadvec2key1"
+  key_name   = "myownadvec2key132"
   public_key = file("/home/ubuntu/.ssh/id_ed25519.pub")
 }
 
